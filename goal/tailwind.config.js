@@ -15,7 +15,8 @@ module.exports = {
           'xxl':'46px',
           'primary':'22px',
           'secondary':'16px',
-          '20':'20px'
+          '20':'20px',
+          '26':'26px',
         },
         width: {
           '800': '800px',

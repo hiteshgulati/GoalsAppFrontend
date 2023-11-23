@@ -1,7 +1,8 @@
 import React from 'react'
 
-function Register2() {
+function Register3() {
   return (
+    <>
     <div className="p-4 bg-background w-screen h-screen">
         
         <div className="sm:text-5xl sm:ml-28 sm:mt-8 text-xxl font-bold text-main">Logo</div>
@@ -10,27 +11,20 @@ function Register2() {
         <div className="md:w-96 md:mt-10">
         <div className="sm:text-3xl text-primary font-semibold text-black pt-4 pb-2">Sign Up</div>
         <div className="pt-3">
-            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Phone' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Aadhar' />
         </div>
-        <div className="pt-3 ">
-            <div className="flex flex-row">
-            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="number" placeholder='OTP' />
-            <button className="bg-white rounded-r-lg px-2 text-main ">Send</button>
-            </div>
-        </div>
-        <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Email ID' />
-        </div>
-        <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Invite Code' />
-        </div>
-        <div className="relative mb-8">
-        <p className="absolute inset-y-0 right-0 text-sm font-medium pt-2">Didn't get the invite link?</p>
+        <div className="pt-3">
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='PAN' />
         </div>
         
         <div className="pt-4"> 
             <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main">
-                Next
+                Sign Up
+            </button>
+        </div>
+        <div className="flex justify-center items-center">
+            <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-2 border-main mt-2">
+                Skip
             </button>
         </div>
         <div className="text-center inset-x-0 bottom-0 sm:mt-2">
@@ -39,7 +33,8 @@ function Register2() {
         </div>
         </div>
     </div>
+    </>
   )
 }
 
-export default Register2
+export default Register3

@@ -6,7 +6,8 @@ import {TbLogout} from 'react-icons/tb'
 import {ImHeadphones} from 'react-icons/im'
 import {RiWhatsappFill} from 'react-icons/ri'
 import {FaTelegramPlane, FaInstagram} from 'react-icons/fa'
-import Navbar from '../../Navbar/Navbar'
+import Navbar from '../Navbar/Navbar'
+import {Link} from 'react-router-dom'
 
 
 
@@ -38,7 +39,9 @@ function Profile1() {
                     <p className="text-lg font-semibold">Jane Doe</p>
                     <p className="text-sm">9310223096</p>
                 </div>
+                <Link to="edit">
                 <PiPencilSimpleLight />
+                </Link>
             </div>
         </div>
         
@@ -98,7 +101,11 @@ function Profile1() {
             </div>
             <div className="basis-3/4 flex flex-row">
                 <p className="text-secondary font-semibold">Contact Us</p>
+                <div className="w-7 mr-3">
+                <a href="https://wa.me/9319223096/?text=Hi">
                 <RiWhatsappFill  className="ml-6 md:ml-40 text-main" size={22} />
+                </a>
+                </div>
                 <FaTelegramPlane  className="ml-3 text-main" size={22}/>
                 <BsLinkedin  className="ml-3 text-main" size={22}/>
                 <FaInstagram className="ml-3 text-main" size={22}/>

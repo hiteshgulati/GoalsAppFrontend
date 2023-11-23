@@ -1,6 +1,7 @@
 import React from 'react'
 import {MdOutlineKeyboardArrowLeft} from 'react-icons/md'
 import {FaRegEdit} from 'react-icons/fa'
+import { FaCamera } from "react-icons/fa";
 import { HiOutlineCake } from "react-icons/hi2";
 
 
@@ -26,7 +27,16 @@ function Profile2() {
         <div className="p-4 flex flex-col md:justify-center md:items-center">
             <div className="md:w-600 mt-10">
             <div className="flex justify-center items-center mt-3">
+                <div className="h-24 w-24 relative">
                 <img className="h-24 w-24 rounded-lg" src="https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686_640.jpg" alt="" />
+                <div className="absolute bottom-0 right-0 bg-white rounded-full p-1 cursor-pointer">
+                    <label htmlFor="myfile" className=''>
+                    <input type="file" id="myfile" name="myfile" className="hidden" />
+                    <FaCamera >
+                    </FaCamera>
+                    </label>
+                </div>
+                </div>
             </div>
             <div className="mt-2">
             <div className="pt-3">
@@ -54,7 +64,7 @@ function Profile2() {
         </div>
             </div>
         </div>
-        <div className="flex flex-row justify-center items-center pt-3 absolute inset-x-0 bottom-0 mb-4">
+        <div className="flex flex-row justify-center items-center pt-3 absolute inset-x-0 bottom-0 mb-2 p-2">
             <div className="bg-transparent px-2 py-2 border-2 border-main w-40 h-11 text-center rounded-lg text-main font-medium mr-1 text-secondary">
                 <button>
                 Discard Changes
