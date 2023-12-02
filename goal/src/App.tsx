@@ -10,6 +10,10 @@ import EditGoal from './Components/goals/EditGoal';
 import AddGoal from './Components/goals/AddGoal';
 import Details from './Components/goals/Details';
 import AddAssets from './Components/allocations/AddAssets';
+import NoAssets from './Components/allocations/NoAssets';
+import Allocation from './Components/allocations/Allocation';
+import GoalHome from './Components/allocations/GoalHome';
+import AssetsInfo from './Components/allocations/AssetsInfo';
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
     <Route path="/details/add" element = {<AddGoal />} />
     <Route path="/detail" element = {<Details />} />
     <Route path="/add-assets" element = {<AddAssets />} />
+    <Route path="/no-assets" element = {<NoAssets />} />
+    <Route path="/allocations" element = {<Allocation />} />
+    <Route path="/goalHome" element = {<GoalHome />} />
+    <Route path="/assetInfo" element = {<AssetsInfo />} />
     </Routes>
     </>
   );

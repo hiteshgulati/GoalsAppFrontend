@@ -14,7 +14,7 @@ function AddGoal() {
                     </p>
                 </div>
                 <div className="basis-1/3">
-                    <p className="text-center text-secondary font-semibold md:text-xl">Edit</p>
+                    <p className="text-center text-secondary font-semibold md:text-xl">Add</p>
                 </div>
                 
             </div>
