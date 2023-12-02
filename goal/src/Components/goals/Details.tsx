@@ -2,7 +2,7 @@ import React from 'react'
 import {MdOutlineKeyboardArrowLeft} from 'react-icons/md'
 import {PiPencilSimpleLight} from 'react-icons/pi'
 import {BsCurrencyRupee, BsPersonFillAdd, BsLinkedin} from 'react-icons/bs'
-import MutualFunds from './MutualFunds'
+import MutualFunds from '../Widgets/MutualFunds'
 
 function Details() {
   return (

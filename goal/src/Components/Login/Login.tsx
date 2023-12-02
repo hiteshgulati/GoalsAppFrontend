@@ -36,7 +36,7 @@ function Login() {
                 Next
             </button>
         </div>
-        {login.value === 'phone' ?(
+        {/* {login.value === 'phone' ?(
         <div className="pt-4"> 
             <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-2 border-main"
             onClick={()=> setLogin({value:'Email'})}
@@ -52,7 +52,7 @@ function Login() {
                 Login with Phone                
             </button>
         </div>
-        )}
+        )} */}
         <Link to="/">
         <div className="text-center inset-x-0 bottom-0 sm:mt-2">
             <p className="font-medium absolute inset-x-0 bottom-0 mb-4">Don't have an account?<span className="font-semibold text-secondary text-main"> Sign Up.</span></p>

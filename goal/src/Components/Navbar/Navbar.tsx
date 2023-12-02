@@ -6,7 +6,7 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 function Navbar() {
   return (
     <>
-    <div className="flex flex-row h-16 pt-1 pb-1 text-sub z-40 sticky bottom-0 bg-white">
+    <div className="flex flex-row h-16 pt-1 pb-1 text-sub z-40 fixed bottom-0 left-0 w-screen bg-white">
         <div className="basis-1/3 flex justify-center w-full">
             <button>
             <div className="flex justify-center">
