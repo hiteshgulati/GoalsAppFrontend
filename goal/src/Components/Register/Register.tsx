@@ -1,30 +1,55 @@
-import React, {useState } from 'react'
+import React, {useState , ChangeEvent, FormEvent} from 'react'
 import Register1 from './Register1';
-import PhoneInput from 'react-phone-input-2'
+import PhoneInput, { CountryData } from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import axios from 'axios';
 
 import {Link} from "react-router-dom"
 
+interface formData{
+    name: string,
+    gender: string,
+    age: string,
+    isd_code: number,
+    phone: number,
+    email: string,
+    aadhaar: string,
+    pan: string,
+    phone_otp: number,
+    password: string,
+    invite_code: string
+}
+
 function Register() {
+
     const [step, setStep] = 
     useState<{value: number}>({
         value: 0
   });
 
   const [phoneNumber, setphoneNumber] = useState("");
+  let num = phoneNumber;
+  Number(num);
+
   const [auth, setAuth] = useState({
         name:"",
         gender:"",
         age:"",
+        isd_code: "91",
         phone:"",
         email:"",
         pan:"",
-        aadhar:"",
+        aadhaar:"",
         phone_otp:"",
-        password:"",
+        password:"123",
         invite_code:""
   })
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setAuth({ ...auth, [name]: name === 'age' ? (value === '' ? '' : String(parseInt(value, 10))) : value, });
+  };
+    
     auth.phone = phoneNumber;
 
 
@@ -32,11 +57,12 @@ function Register() {
     setStep({value: step.value+1});
   }
   console.log(phoneNumber);
+//   console.log(num);
 
   const sendOtp = async()=>{
     // e.preventDefault();
     try{
-        const response = await axios.post("http://54.160.182.187:8000/users/register/mobile-otp",{
+        const response = await axios.post("https://amb-api-dev.embetter.in/users/register/mobile-otp",{
             phoneNumber
         })
         console.log(response);
@@ -48,17 +74,21 @@ function Register() {
 
     const handleSubmit = async()=>{
         console.log("The payload is", auth);
-        // try{
-        //     const response = await axios.post("http://54.160.182.187:8000/users/register/new-user", auth);
-        //     console.log(response);
-        // }catch(err){
-        //     console.log(err);
-        // }
-        axios.post("http://54.160.182.187:8000/users/register/new-user", auth)
-        .then((res)=>{
-            console.log(res);
-        })
-        .catch((err)=> console.log(err))
+        try{
+            const response = await axios.post("https://amb-api-dev.embetter.in/users/register/new-user", auth,{
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            console.log(response);
+        }catch(err){
+            console.log(err);
+        }
+        // axios.post("https://amb-api-dev.embetter.in/users/register/new-user", auth)
+        // .then((res)=>{
+        //     console.log(res);
+        // })
+        // .catch((err)=> console.log(err))
     }
 
 
@@ -84,15 +114,16 @@ function Register() {
                     setAuth({...auth, gender: e.target.value})
                 }}>
                     <option value="gender"> Gender</option>
-                    <option value="Male"> Male</option>
-                    <option value="Female"> Female</option>
-                    <option value="Others"> Others</option>
+                    <option value="male"> Male</option>
+                    <option value="female"> Female</option>
+                    <option value="other"> Others</option>
                 </select>
         </div>
         <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Age' onChange={(e)=>
-            setAuth({ ...auth, age: e.target.value})
-            }/>
+            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Age' onChange={(e)=>{
+                setAuth({...auth, age:e.target.value})
+            }}
+            />
         </div>
         
         <div className="pt-4"> 
@@ -129,16 +160,19 @@ function Register() {
                 width:"320px",
                 border:"none",
               }}
+            //   disableCountryCode={true}
             // value={phoneNumber}
-            onChange={(value)=> setphoneNumber("+" + value)}
+            onChange={(value, country : CountryData, e, formattedValue)=> {setphoneNumber(value.slice(country.dialCode.length))
+                // ({ rawPhone: value.slice(data.dialCode.length) })
+                    console.log(value);}}
             />
         </div>
         <div className="pt-3 ">
             <div className="flex flex-row">
-            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="tel" inputMode='numeric' maxLength={10} placeholder='OTP'
-            onChange={(e)=>{
+            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="tel" inputMode='numeric' maxLength={10} onChange={(e)=>{
                 setAuth({...auth, phone_otp:e.target.value})
             }}
+            
             />
             
             <button className="bg-white rounded-r-lg px-2 text-main" onClick={sendOtp}>Send</button>
@@ -192,7 +226,7 @@ function Register() {
         <div className="pt-3">
             <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Aadhar' 
             onChange={(e)=>{
-                setAuth({...auth, aadhar:e.target?.value})
+                setAuth({...auth, aadhaar:e.target?.value})
             }}
             />
         </div>

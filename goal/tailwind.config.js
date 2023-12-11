@@ -9,7 +9,11 @@ module.exports = {
         colors:{
           'main':'#6B9080',
           'sub':'#B3B3B3',
-          'background':'#F7F7F7'
+          'background':'#F7F7F7',
+          'base-color':'F0F0F0',
+          'panels':'179E76',
+          'highlights':'072D42',
+          'victory':'F98902'
         },
         fontSize:{
           'xxl':'46px',
