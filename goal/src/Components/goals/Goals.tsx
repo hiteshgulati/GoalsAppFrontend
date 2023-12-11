@@ -6,9 +6,9 @@ import MutualFunds from '../Widgets/MutualFunds';
 import { FaCheck } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import Navbar from '../Navbar/Navbar';
+import GoalFidget from '../Widgets/GoalFidget';
 
-
-function GoalHome() {
+function Goals() {
   return (
     <>
     <div className="h-screen w-screen bg-background relative">
@@ -34,31 +34,17 @@ function GoalHome() {
             <div className="pt-3 ">
             <div className="flex flex-row">
               <button className="bg-white rounded-l-lg px-2 text-sub "><IoSearch /></button>
-              <input className="w-full h-12 px-2 py-2 rounded-r-lg" type="search" placeholder='Search Assets' />
+              <input className="w-full h-12 px-2 py-2 rounded-r-lg" type="search" placeholder='Search Funds' />
             </div>
             </div>
+        </div>
 
-            <div className="flex flex-row justify-center items-center mt-8">
-            <p className="basis-1/2 text-sm font-medium"> Mutual Funds</p>
-            <p className="basis-1/4 text-sm font-medium"> 80%</p>
-            <p className="basis-1/4 text-sm font-medium flex"><BsCurrencyRupee className="mt-1"/> 32,280</p>
-            </div>
-            <hr className="h-px my-2 bg-gray-300 border-1 dark:bg-gray-300"></hr>
-
-            <MutualFunds />
-            <MutualFunds />
-            <MutualFunds />
-            <div className="flex flex-row justify-center items-center mt-8">
-            <p className="basis-1/2 text-sm font-medium"> Stock</p>
-            <p className="basis-1/4 text-sm font-medium"> 80%</p>
-            <p className="basis-1/4 text-sm font-medium flex"><BsCurrencyRupee className="mt-1"/> 32,280</p>
-            </div>
-            <hr className="h-px my-2 bg-gray-300 border-1 dark:bg-gray-300"></hr>
-
-            <MutualFunds />
-            <MutualFunds />
-            <MutualFunds />
-            
+        <div className="mt-4 w-80 grid gap-x-6 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 flex flex-row pb-20 bg-background">
+                <GoalFidget />
+                <GoalFidget />
+                <GoalFidget />
+                <GoalFidget />
+                <GoalFidget />
         </div>
     
         {/* <div className="flex flex-row justify-center items-center pt-3 absolute inset-x-0 bottom-0 p-4 bg-white w-screen"> */}
@@ -77,4 +63,4 @@ function GoalHome() {
   )
 }
 
-export default GoalHome
+export default Goals
