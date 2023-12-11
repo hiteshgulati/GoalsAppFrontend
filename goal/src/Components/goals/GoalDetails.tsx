@@ -2,6 +2,7 @@ import React from 'react'
 import {MdOutlineKeyboardArrowLeft} from 'react-icons/md'
 import {PiPencilSimpleLight} from 'react-icons/pi'
 import {BsCurrencyRupee, BsPersonFillAdd, BsLinkedin} from 'react-icons/bs'
+import Navbar from '../Navbar/Navbar'
 
 
 
@@ -9,7 +10,7 @@ function GoalDetails() {
   return (
     <>
     <div className="h-screen w-screen bg-background relative">
-        <div>
+        <div className="sticky top-0">
             <div className="flex flex-row h-14 bg-white items-center">
                 <div className="basis-1/3">
                     <p className="text-xl pl-2 md:pl-4">
@@ -17,7 +18,7 @@ function GoalDetails() {
                     </p>
                 </div>
                 <div className="basis-1/3">
-                    <p className="text-center text-secondary font-semibold md:text-xl">Profile</p>
+                    <p className="text-center text-secondary font-semibold md:text-xl">Goal Details</p>
                 </div>
             </div>
         </div>
@@ -61,10 +62,11 @@ function GoalDetails() {
             </div>
 
             <div className="flex flex-col justify-center items-center p-2 mt-12">
-                <p className="text-base font-semibold text-center">You don't have any assets alloacted for this goal</p>
-                <p className="text-base font-semibold"><span className="text-main">Click Here</span> to start adding assets</p>
+                <p className="text-base font-semibold text-center">You don't have any Funds alloacted for this goal</p>
+                <p className="text-base font-semibold"><span className="text-main">Click Here</span> to start adding Funds</p>
             </div>
         </div>
+        <Navbar />
     </div>
 
     </>

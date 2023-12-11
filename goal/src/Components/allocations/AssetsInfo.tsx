@@ -21,7 +21,7 @@ function AssetsInfo() {
                     </p>
                 </div>
                 <div className="basis-2/3">
-                    <p className="text-center text-secondary font-semibold md:text-xl">Assets</p>
+                    <p className="text-center text-secondary font-semibold md:text-xl">Funds</p>
                 </div>
             </div>
         </div>

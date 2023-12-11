@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, {useState } from 'react'
 import Register1 from './Register1';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import axios from 'axios';
 
 import {Link} from "react-router-dom"
 
@@ -9,9 +12,56 @@ function Register() {
         value: 0
   });
 
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [auth, setAuth] = useState({
+        name:"",
+        gender:"",
+        age:"",
+        phone:"",
+        email:"",
+        pan:"",
+        aadhar:"",
+        phone_otp:"",
+        password:"",
+        invite_code:""
+  })
+    auth.phone = phoneNumber;
+
+
   const handleNext = () =>{
     setStep({value: step.value+1});
   }
+  console.log(phoneNumber);
+
+  const sendOtp = async()=>{
+    // e.preventDefault();
+    try{
+        const response = await axios.post("http://54.160.182.187:8000/users/register/mobile-otp",{
+            phoneNumber
+        })
+        console.log(response);
+    }
+    catch(err){
+        console.log(err);
+    }
+  }
+
+    const handleSubmit = async()=>{
+        console.log("The payload is", auth);
+        // try{
+        //     const response = await axios.post("http://54.160.182.187:8000/users/register/new-user", auth);
+        //     console.log(response);
+        // }catch(err){
+        //     console.log(err);
+        // }
+        axios.post("http://54.160.182.187:8000/users/register/new-user", auth)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=> console.log(err))
+    }
+
+
 
   return (
     <>
@@ -25,10 +75,14 @@ function Register() {
         <div className="md:w-96 md:mt-10">
         <div className="sm:text-3xl text-primary font-semibold text-black pt-4 pb-2">Sign Up</div>
         <div className="pt-3">
-            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Phone' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Name' onChange={(e) =>
+                        setAuth({ ...auth, name: e.target.value })
+                      }/>
         </div>
         <div className="pt-3 ">
-                <select className="w-full h-12 px-2 py-2 rounded text-sub" name="genders" id="gender">
+                <select className="w-full h-12 px-2 py-2 rounded text-sub" name="genders" id="gender" onChange={(e)=>{
+                    setAuth({...auth, gender: e.target.value})
+                }}>
                     <option value="gender"> Gender</option>
                     <option value="Male"> Male</option>
                     <option value="Female"> Female</option>
@@ -36,7 +90,9 @@ function Register() {
                 </select>
         </div>
         <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Age' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Age' onChange={(e)=>
+            setAuth({ ...auth, age: e.target.value})
+            }/>
         </div>
         
         <div className="pt-4"> 
@@ -65,19 +121,42 @@ function Register() {
         <div className="md:w-96 md:mt-10">
         <div className="sm:text-3xl text-primary font-semibold text-black pt-4 pb-2">Sign Up</div>
         <div className="pt-3">
-            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Phone' />
+            {/* <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Phone' /> */}
+            <PhoneInput 
+            country={'in'}
+            inputStyle={{
+                height:"48px",
+                width:"320px",
+                border:"none",
+              }}
+            // value={phoneNumber}
+            onChange={(value)=> setphoneNumber("+" + value)}
+            />
         </div>
         <div className="pt-3 ">
             <div className="flex flex-row">
-            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="number" placeholder='OTP' />
-            <button className="bg-white rounded-r-lg px-2 text-main ">Send</button>
+            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="tel" inputMode='numeric' maxLength={10} placeholder='OTP'
+            onChange={(e)=>{
+                setAuth({...auth, phone_otp:e.target.value})
+            }}
+            />
+            
+            <button className="bg-white rounded-r-lg px-2 text-main" onClick={sendOtp}>Send</button>
             </div>
         </div>
         <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Email ID' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="email" placeholder='Email ID' 
+            onChange={(e)=>{
+                setAuth({...auth, email:e.target.value})
+            }}
+            />
         </div>
         <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="number" placeholder='Invite Code' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Invite Code' 
+            onChange={(e)=>{
+                setAuth({...auth, invite_code: e.target?.value})
+            }}
+            />
         </div>
         <div className="relative mb-8">
         <a className="mailtoui" href="mailto:utkarshmauryacs@gmail.com?body=Hope%20you're%20doing%20well.">
@@ -111,14 +190,21 @@ function Register() {
         <div className="md:w-96 md:mt-10">
         <div className="sm:text-3xl text-primary font-semibold text-black pt-4 pb-2">Sign Up</div>
         <div className="pt-3">
-            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Aadhar' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Aadhar' 
+            onChange={(e)=>{
+                setAuth({...auth, aadhar:e.target?.value})
+            }}
+            />
         </div>
         <div className="pt-3">
-            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='PAN' />
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='PAN' 
+            onChange={(e)=>{
+                setAuth({...auth, pan:e.target?.value})
+            }}/>
         </div>
         
         <div className="pt-4"> 
-            <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main">
+            <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main" onClick={handleSubmit}>
                 Sign Up
             </button>
         </div>

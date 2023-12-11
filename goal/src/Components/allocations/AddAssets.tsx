@@ -47,11 +47,11 @@ function AddAssets() {
             <hr className="h-px my-4 bg-gray-300 border-1 dark:bg-gray-300"></hr>
 
             <div className="dark:bg-gray-300 flex flex-col items-center px-2 py-4 mt-4">
-                <p className="mt-2 text-sm font-medium">Select Assets for Allocation</p>
+                <p className="mt-2 text-sm font-medium">Select Funds for Allocation</p>
                 <div className="pt-3 ">
                     <div className="flex flex-row w-72">
                         <div className="bg-white rounded-l-lg px-2 text-main "><IoSearchSharp className="mt-3" size={18}/></div>
-                        <input className="w-full h-10 px-2 py-2 rounded-r-lg" type="search" placeholder='Search Assets' />
+                        <input className="w-full h-10 px-2 py-2 rounded-r-lg" type="search" placeholder='Search Funds' />
                     </div>
                 <CheckFunds />
                 <CheckFunds />
@@ -66,7 +66,7 @@ function AddAssets() {
                 </div>
                 <div className="bg-main px-2 py-2 border-2 border-main w-40 h-11 text-center rounded-lg text-main font-medium text-white ml-1 text-secondary">
                     <button>
-                    Add Assets
+                    Add Funds
                     </button>
                 </div>
             </div>

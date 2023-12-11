@@ -52,22 +52,22 @@ function noAssets() {
 
             <hr className="h-px my-4 bg-gray-300 border-1 dark:bg-gray-300"></hr>
 
-            <p className="mt-2 text-sm font-medium">Allocated Assets</p>
+            <p className="mt-2 text-sm font-medium">Allocated Funds</p>
             <div className="flex flex-col items-center mt-6 text-secondary font-medium">
                 <p> <span className="text-main">Click Here</span> to start adding</p>
-                <p>Assets for Allocation</p>
+                <p>Funds for Allocation</p>
             </div>
             <div className="flex flex-col items-center mt-6 text-secondary font-medium">
                 <p> <span className="text-main">Click Here</span> to start adding</p>
-                <p>Assets for Allocation</p>
+                <p>Funds for Allocation</p>
             </div>
             <div className="flex flex-col items-center mt-6 text-secondary font-medium">
                 <p> <span className="text-main">Click Here</span> to start adding</p>
-                <p>Assets for Allocation</p>
+                <p>Funds for Allocation</p>
             </div>
             <div className="flex flex-col items-center mt-6 text-secondary font-medium">
                 <p> <span className="text-main">Click Here</span> to start adding</p>
-                <p>Assets for Allocation</p>
+                <p>Funds for Allocation</p>
             </div>
             <div className="flex flex-col items-center mt-6 text-secondary font-medium">
                 <p> <span className="text-main">Click Here</span> to start adding</p>

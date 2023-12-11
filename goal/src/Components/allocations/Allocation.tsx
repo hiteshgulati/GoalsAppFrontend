@@ -55,13 +55,13 @@ function Allocation() {
             </div>
 
             <hr className="h-px my-2 bg-gray-300 border-1 dark:bg-gray-300"></hr>
-            <p className="font-bold text-sm"> Allocated Assets</p>
+            <p className="font-bold text-sm"> Allocated Funds</p>
             <hr className="h-px my-2 bg-gray-300 border-1 dark:bg-gray-300"></hr>
 
             <MutualFunds />
             <MutualFunds />
 
-            <div className="p-2 bg-white flex flex-col justify-center items-center mx-4 my-4">
+            <div className="p-2 bg-white flex flex-col justify-center items-center mx-4 my-4 py-4">
                 <p className="text-sm font-bold">Axis Bluechip Fund</p>
                 <div className="flex flex-row mt-2">
                     <p className="flex flex-row py-1 px-2 font-medium"><BsCurrencyRupee className="mt-1"/> 53.3 x</p>

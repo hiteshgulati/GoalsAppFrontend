@@ -3,12 +3,14 @@ import {MdOutlineKeyboardArrowLeft} from 'react-icons/md'
 import {PiPencilSimpleLight} from 'react-icons/pi'
 import {BsCurrencyRupee, BsPersonFillAdd, BsLinkedin} from 'react-icons/bs'
 import MutualFunds from '../Widgets/MutualFunds'
+import Navbar from '../Navbar/Navbar';
+
 
 function Details() {
   return (
     <>
     <div className="h-screen w-screen bg-background">
-        <div>
+        <div className="sticky top-0">
             <div className="flex flex-row h-14 bg-white items-center">
                 <div className="basis-1/3">
                     <p className="text-xl pl-2 md:pl-4">
@@ -16,7 +18,7 @@ function Details() {
                     </p>
                 </div>
                 <div className="basis-1/3">
-                    <p className="text-center text-secondary font-semibold md:text-xl">Profile</p>
+                    <p className="text-center text-secondary font-semibold md:text-xl">Goal Details</p>
                 </div>
             </div>
         </div>
@@ -71,8 +73,16 @@ function Details() {
             <hr className="h-px my-2 bg-gray-300 border-1 dark:bg-gray-300"></hr>
 
             <MutualFunds />
+            <MutualFunds />
+            <MutualFunds />
+            <MutualFunds />
+            <MutualFunds />
+            <MutualFunds />
+            <MutualFunds />
             
         </div>
+        <Navbar />
+
     </div>
     </>
   )
