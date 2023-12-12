@@ -6,20 +6,6 @@ import axios from 'axios';
 
 import {Link} from "react-router-dom"
 
-interface formData{
-    name: string,
-    gender: string,
-    age: string,
-    isd_code: number,
-    phone: number,
-    email: string,
-    aadhaar: string,
-    pan: string,
-    phone_otp: number,
-    password: string,
-    invite_code: string
-}
-
 function Register() {
 
     const [step, setStep] = 
@@ -27,43 +13,45 @@ function Register() {
         value: 0
   });
 
-  const [phoneNumber, setphoneNumber] = useState("");
-  let num = phoneNumber;
-  Number(num);
+  const [mobile_number, setMobileNumber] = useState("");
+  const [isd_code, setIsd_code] = useState("");
+    
+  console.log(isd_code);
 
   const [auth, setAuth] = useState({
         name:"",
         gender:"",
         age:"",
-        isd_code: "91",
+        isd_code: "",
         phone:"",
         email:"",
         pan:"",
         aadhaar:"",
         phone_otp:"",
-        password:"123",
+        password:"",
         invite_code:""
   })
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = e.target;
-    setAuth({ ...auth, [name]: name === 'age' ? (value === '' ? '' : String(parseInt(value, 10))) : value, });
-  };
-    
-    auth.phone = phoneNumber;
+  
+    auth.phone = mobile_number;
+    auth.isd_code = isd_code
 
 
   const handleNext = () =>{
     setStep({value: step.value+1});
   }
-  console.log(phoneNumber);
-//   console.log(num);
+  const handleBack = () =>{
+    setStep({value: step.value-1});
+  }
+
+
+  console.log(mobile_number);
 
   const sendOtp = async()=>{
     // e.preventDefault();
     try{
-        const response = await axios.post("https://amb-api-dev.embetter.in/users/register/mobile-otp",{
-            phoneNumber
+        const response = await axios.post(`https://amb-api-dev.embetter.in/users/register/mobile-otp?isd_code=${isd_code}&mobile_number=${mobile_number}`,{
+            isd_code,
+            mobile_number
         })
         console.log(response);
     }
@@ -84,11 +72,6 @@ function Register() {
         }catch(err){
             console.log(err);
         }
-        // axios.post("https://amb-api-dev.embetter.in/users/register/new-user", auth)
-        // .then((res)=>{
-        //     console.log(res);
-        // })
-        // .catch((err)=> console.log(err))
     }
 
 
@@ -124,6 +107,18 @@ function Register() {
                 setAuth({...auth, age:e.target.value})
             }}
             />
+        </div>
+        <div className="pt-3 ">
+            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Invite Code' 
+            onChange={(e)=>{
+                setAuth({...auth, invite_code: e.target?.value})
+            }}
+            />
+        </div>
+        <div className="relative mb-8">
+        <a className="mailtoui" href="mailto:utkarshmauryacs@gmail.com?body=Hope%20you're%20doing%20well.">
+        <p className="absolute inset-y-0 right-0 text-sm font-medium pt-2">Didn't get the invite link?</p>
+        </a>
         </div>
         
         <div className="pt-4"> 
@@ -162,14 +157,15 @@ function Register() {
               }}
             //   disableCountryCode={true}
             // value={phoneNumber}
-            onChange={(value, country : CountryData, e, formattedValue)=> {setphoneNumber(value.slice(country.dialCode.length))
+            onChange={(value, country : CountryData, e, formattedValue)=> {setMobileNumber(value.slice(country.dialCode.length))
                 // ({ rawPhone: value.slice(data.dialCode.length) })
-                    console.log(value);}}
+                    setIsd_code(country.dialCode);
+                }}
             />
         </div>
         <div className="pt-3 ">
             <div className="flex flex-row">
-            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="tel" inputMode='numeric' maxLength={10} onChange={(e)=>{
+            <input className="w-full h-12 px-2 py-2 rounded-l-lg" type="tel" inputMode='numeric' placeholder='OTP' maxLength={10} onChange={(e)=>{
                 setAuth({...auth, phone_otp:e.target.value})
             }}
             
@@ -186,21 +182,23 @@ function Register() {
             />
         </div>
         <div className="pt-3 ">
-            <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Invite Code' 
+            <input className="w-full h-12 px-2 py-2 rounded" type="password" placeholder='Password' 
             onChange={(e)=>{
-                setAuth({...auth, invite_code: e.target?.value})
+                setAuth({...auth, password:e.target.value})
             }}
             />
         </div>
-        <div className="relative mb-8">
-        <a className="mailtoui" href="mailto:utkarshmauryacs@gmail.com?body=Hope%20you're%20doing%20well.">
-        <p className="absolute inset-y-0 right-0 text-sm font-medium pt-2">Didn't get the invite link?</p>
-        </a>
-        </div>
+        
         
         <div className="pt-4"> 
             <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main" onClick={handleNext}>
                 Next
+            </button>
+        </div>
+        <div className="flex justify-center items-center">
+            <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-2 border-main mt-2"
+            onClick={handleBack}>
+                Back
             </button>
         </div>
         <Link to="login">
@@ -240,6 +238,12 @@ function Register() {
         <div className="pt-4"> 
             <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main" onClick={handleSubmit}>
                 Sign Up
+            </button>
+        </div>
+        <div className="flex justify-center items-center">
+            <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-2 border-main mt-2"
+            onClick={handleBack}>
+                Back
             </button>
         </div>
         <div className="flex justify-center items-center">

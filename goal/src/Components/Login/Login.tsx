@@ -2,12 +2,27 @@ import React from 'react'
 import { FaEyeSlash } from "react-icons/fa";
 import { useState } from 'react';
 import {Link} from "react-router-dom"
+import axios from 'axios';
+import PhoneInput, { CountryData } from 'react-phone-input-2'
 
 function Login() {
-    const [login, setLogin] = 
-    useState<{value: string;}>({
-        value: 'phone',
-  });
+    
+    const [mobile_number, setMobileNumber] = useState("");
+    const [isd_code, setIsd_code] = useState("");
+    const [password, setPassword] = useState("");
+
+    console.log({mobile_number, isd_code, password});
+
+  const handleSubmit = async()=>{
+    try{
+        const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/mobile-password?isd_code={isd_code}&phone={mobile_number}&password={password}`
+           );
+        console.log(response);
+    }catch(err){
+        console.log(err);
+    }
+}
+
   const [step, setStep] = 
     useState<{value: number}>({
         value: 0
@@ -31,25 +46,32 @@ function Login() {
 
         {step.value === 0 && (
             <>
-                    {login.value === 'phone' ?
-                (
-                    <div className="pt-3">
-                    <input className="w-full h-12 px-2 py-2 rounded" type="tel" placeholder='Phone' />
+                
+                <div className="pt-3">
+                    {/* <input className="w-full h-12 px-2 py-2 rounded" type="text" placeholder='Phone' /> */}
+                    <PhoneInput 
+                    country={'in'}
+                    inputStyle={{
+                        height:"48px",
+                        width:"320px",
+                        border:"none",
+                    }}
+                    //   disableCountryCode={true}
+                    // value={phoneNumber}
+                    onChange={(value, country : CountryData, e, formattedValue)=> {setMobileNumber(value.slice(country.dialCode.length))
+                        // ({ rawPhone: value.slice(data.dialCode.length) })
+                            setIsd_code(country.dialCode);
+                        }}
+                    />
                 </div>
-                ):
-                (
-                    <div className="pt-3">
-                    <input className="w-full h-12 px-2 py-2 rounded" type="email" placeholder='Email' />
-                </div>
-                )
-                }
+               
                 
                 <div className="pt-4"> 
                     <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main" onClick={handleNext}>
                         Next
                     </button>
                 </div>
-                {login.value === 'phone' ?(
+                {/* {login.value === 'phone' ?(
                 <div className="pt-4"> 
                     <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-2 border-main"
                     onClick={()=> setLogin({value:'Email'})}
@@ -65,32 +87,31 @@ function Login() {
                         Login with Phone                
                     </button>
                 </div>
-                )}
+                )} */}
             </>
         )}
         {step.value === 1 && (
             <>
-                    {login.value === 'phone' ?
-                (
+                
                     <div className="pt-3">
-                    <input className="w-full h-12 px-2 py-2 rounded" type="tel" placeholder='OTP' />
+                    <input className="w-full h-12 px-2 py-2 rounded" type="password" placeholder='Password' 
+                    onChange={(e)=>{
+                        setPassword(e.target.value)
+                    }}
+                    />
                 </div>
-                ):
-                (
-                    <div className="pt-3">
-                    <input className="w-full h-12 px-2 py-2 rounded" type="email" placeholder='Password' />
-                </div>
-                )
-                }
                 
                 <div className="pt-4"> 
-                    <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main" onClick={handleBack}>
-                        Back
+                    <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-main"
+                    onClick={handleSubmit}
+                    >
+                        Submit
                     </button>
                 </div>
+
                 <div className="pt-4"> 
-                    <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-2 border-main">
-                        Submit
+                    <button className="w-full h-12 rounded text-secondary text-main font-semibold bg-transparent border-main border-2" onClick={handleBack}>
+                        Back
                     </button>
                 </div>
                 
