@@ -40,6 +40,8 @@ function Register() {
   const [isSubmitDisabled, setSubmitDisabled] = useState(false);
   const [isOTPDisabled, setOTPDisabled] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [userExists, setUserExists] = useState(null);
+
 
 
   
@@ -52,6 +54,32 @@ function Register() {
   }
   const handleBack = () =>{
     setStep({value: step.value-1});
+  }
+
+  const checkUser = async()=>{
+    try{
+        const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
+            isd_code,
+            mobile_number
+        })
+        console.log(response);
+        console.log(userExists);
+        if(response.data.true){
+        setUserExists(response.data);
+        setTimeout(() => {
+            setUserExists(null);
+            window.location.replace('/login')
+          }, 3000);
+        }
+        else{
+            setStep({value: step.value+1}); 
+        }
+
+        
+    }
+    catch(err){
+        console.log(err);
+    }
   }
 
 
@@ -150,12 +178,12 @@ function Register() {
         {/* <a className="mailtoui" href="mailto:utkarshmauryacs@gmail.com?body=Hope%20you're%20doing%20well.">
         <p className="absolute inset-y-0 right-0 text-sm font-medium pt-2">Didn't get the invite link?</p>
         </a> */}
-        <p className="absolute inset-y-0 right-0 text-sm font-medium pt-2">Didn't get the invite link? Get it by  
-        <a href="mailto:utkarshmauryacs@gmail.com"
+        <p className="absolute inset-y-0 right-0 text-sm font-medium pt-2">Didn't get the invite link? Get it by   
+        <a href="mailto:hg0111@gmail.com"
         data-subject="A strange email"
         data-body="This email is for me with me also in cc and in bcc"
         className="underline"
-        > mail</a> or <a href="tel:9319223096" className="underline">call</a>.</p>
+        > mail</a> or <a href="tel:9662299167" className="underline">call</a>.</p>
         </div>
         
         <div className="pt-4"> 
@@ -231,7 +259,7 @@ function Register() {
         
         
         <div className="pt-4"> 
-            <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels" onClick={handleNext}>
+            <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels" onClick={checkUser}>
                 Next
             </button>
         </div>
@@ -241,6 +269,13 @@ function Register() {
                 Back
             </button>
         </div>
+
+        {userExists && (
+                    <div className="text-red-700 bg-transparent font-medium p-2 mt-4 rounded text-center">
+                    <p>User already exists. Redirecting to login page.</p>
+                  </div>
+                )}
+
         <Link to="login">
         <div className="text-center inset-x-0 bottom-0 sm:mt-2">
             <p className="font-medium absolute inset-x-0 bottom-0 mb-4">Already have an account?<span className="font-semibold text-secondary text-panels"> Login.</span></p>
@@ -288,7 +323,7 @@ function Register() {
         </div>
 
         {errorMessage && (
-                    <div className="text-red-500 bg-transparent font-medium text-white p-2 mt-4 rounded text-center">
+                    <div className="text-red-700 bg-transparent font-medium p-2 mt-4 rounded text-center">
                     {errorMessage}
                   </div>
                 )}
