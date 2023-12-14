@@ -67,7 +67,7 @@ function Login() {
                     country={'in'}
                     inputStyle={{
                         height:"48px",
-                        width:"320px",
+                        width:"100%",
                         border:"none",
                     }}
                     //   disableCountryCode={true}
@@ -131,7 +131,7 @@ function Login() {
                 </div>
 
                 {errorMessage && (
-                    <div className="text-red-500 bg-transparent font-medium text-white p-2 mt-4 rounded text-center">
+                    <div className="text-red-700 bg-transparent font-medium p-2 mt-4 rounded text-center">
                     {errorMessage}
                   </div>
                 )}
