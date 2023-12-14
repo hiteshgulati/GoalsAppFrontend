@@ -8,7 +8,7 @@ import { HiOutlineCake } from "react-icons/hi2";
 function Profile2() {
   return (
     <>
-    <div className="h-screen w-screen bg-background relative">
+    <div className="h-screen w-screen bg-base-colorround relative">
         <div className="flex flex-row h-14 bg-white items-center">
             <div className="basis-1/3">
                 <p className="text-xl pl-2 md:pl-4">
@@ -19,7 +19,7 @@ function Profile2() {
                 <p className="text-center text-secondary font-semibold md:text-xl">Edit Profile</p>
             </div>
             <div className="basis-1/3 flex justify-end pr-4">
-                <p className=" text-secondary font-semibold md:text-xl text-main md:pr-4">
+                <p className=" text-secondary font-semibold md:text-xl text-panels md:pr-4">
                     <FaRegEdit size={20} />
                     </p>
             </div>
@@ -65,12 +65,12 @@ function Profile2() {
             </div>
         </div>
         <div className="flex flex-row justify-center items-center pt-3 absolute inset-x-0 bottom-0 mb-2 p-2">
-            <div className="bg-transparent px-2 py-2 border-2 border-main w-40 h-11 text-center rounded-lg text-main font-medium mr-1 text-secondary">
+            <div className="bg-transparent px-2 py-2 border-2 border-panels w-40 h-11 text-center rounded-lg text-panels font-medium mr-1 text-secondary">
                 <button>
                 Discard Changes
                 </button>
                 </div>
-            <div className="bg-main px-2 py-2 border-2 border-main w-40 h-11 text-center rounded-lg text-main font-medium text-white ml-1 text-secondary">
+            <div className="bg-panels px-2 py-2 border-2 border-panels w-40 h-11 text-center rounded-lg font-medium text-white ml-1 text-secondary">
                 <button>
                 Save Changes
                 </button>

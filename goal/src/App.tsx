@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom"
 import Login from './Components/Login/Login';
 import Profile1 from './Components/Profile/Profile1';
 import Profile2 from './Components/Profile/Profile2';
-import Register from './Components/Register/Register';
+import Register from './Components/Register';
 import GoalDetails from './Components/goals/GoalDetails';
 import EditGoal from './Components/goals/EditGoal';
 import AddGoal from './Components/goals/AddGoal';
