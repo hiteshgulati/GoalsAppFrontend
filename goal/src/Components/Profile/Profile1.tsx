@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom'
 function Profile1() {
   return (
     <>
-    <div className="h-screen w-screen bg-background relative">
+    <div className="h-screen w-screen bg-base-color relative">
      <div>
         <div className="flex flex-row h-14 bg-white items-center">
             <div className="basis-1/3">
@@ -27,7 +27,7 @@ function Profile1() {
             </div>
         </div>
     </div>
-    <div className="bg-background md:flex md:justify-center md:items-center">
+    <div className="bg-base-color md:flex md:justify-center md:items-center">
 
     <div className="p-4 md:w-800 md:mt-10">
         <div className="flex flex-row">
@@ -50,14 +50,14 @@ function Profile1() {
             <div className="basis-3/4">
                 <p className="text-xl sm:text-2xl font-bold pb-2">Goals</p>
             <div className="w-full rounded h-5 dark:bg-gray-300">
-                <div className="bg-main h-5 rounded" style={{width:"45%"}}></div>
+                <div className="bg-panels h-5 rounded" style={{width:"45%"}}></div>
                 <div className="flex flex-row justify-between">
                     <p className="flex flex-row text-secondary font-semibold">
-                        <span className="text-main flex flex-row">
+                        <span className="text-panels flex flex-row">
                             <BsCurrencyRupee className='pt-1' size={20}/> 4.53L/
                             </span>
                         <BsCurrencyRupee className='pt-1' size={20}/>19.69L</p>     
-                    <p className="text-main font-semibold">73%</p>
+                    <p className="text-panels font-semibold">73%</p>
                 </div>
             </div>
             </div>
@@ -67,52 +67,52 @@ function Profile1() {
             <div className="basis-3/4">
                 <p className="text-xl md:text-2xl font-bold pb-2">Assets</p>
             <div className="w-full rounded h-8 dark:bg-gray-300">
-                <div className="bg-main h-8 rounded" style={{width:"45%"}}></div>
+                <div className="bg-panels h-8 rounded" style={{width:"45%"}}></div>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt-1">
                     <p className="flex flex-row font-semibold">
                         Allocated (89%)
                     </p>   
-                    <p className="text-main font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 4.53L</p>
+                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 4.53L</p>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt">
                     <p className="flex flex-row font-semibold">
                         Free Use (11%)
                     </p>   
-                    <p className="text-main font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 55.3K</p>
+                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 55.3K</p>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt">
                     <p className="flex flex-row font-semibold">
                         Total (100%)
                     </p>   
-                    <p className="text-main font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 5.09L</p>
+                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 5.09L</p>
                 </div>
             </div>
         </div>
         <div className="flex flex-row pt-20">
-            <div className="basis-1/4 pt-1 pl-10 text-main"><TbLogout size={24}/></div>
+            <div className="basis-1/4 pt-1 pl-10 text-panels"><TbLogout size={24}/></div>
             <div className="basis-3/4">
                 <p className="text-secondary font-semibold">Logout</p>
             </div>
         </div>
         <div className="flex flex-row pt-4">
-            <div className="basis-1/4 pt-1 pl-10 text-main">
+            <div className="basis-1/4 pt-1 pl-10 text-panels">
                 <ImHeadphones size={18}/>
             </div>
             <div className="basis-3/4 flex flex-row">
                 <p className="text-secondary font-semibold">Contact Us</p>
                 <div className="w-7 mr-3">
                 <a href="https://wa.me/9319223096/?text=Hi">
-                <RiWhatsappFill  className="ml-6 md:ml-40 text-main" size={22} />
+                <RiWhatsappFill  className="ml-6 md:ml-40 text-panels" size={22} />
                 </a>
                 </div>
-                <FaTelegramPlane  className="ml-3 text-main" size={22}/>
-                <BsLinkedin  className="ml-3 text-main" size={22}/>
-                <FaInstagram className="ml-3 text-main" size={22}/>
+                <FaTelegramPlane  className="ml-3 text-panels" size={22}/>
+                <BsLinkedin  className="ml-3 text-panels" size={22}/>
+                <FaInstagram className="ml-3 text-panels" size={22}/>
             </div>
         </div>
         <div className="flex flex-row pt-4">
-            <div className="basis-1/4 pt-1 pl-10 text-main">
+            <div className="basis-1/4 pt-1 pl-10 text-panels">
                 <BsPersonFillAdd  size={20}/>
             </div>
             <div className="basis-3/4">
