@@ -12,12 +12,40 @@ function Login() {
     const [password, setPassword] = useState("");
     const [isSubmitDisabled, setSubmitDisabled] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [userExists, setUserExists] = useState(null);
+
     const [step, setStep] = 
     useState<{value: number}>({
         value: 0
   });
 
-    console.log({mobile_number, isd_code, password});
+    // console.log({mobile_number, isd_code, password});
+
+    const checkUser = async()=>{
+        try{
+            const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
+                isd_code,
+                mobile_number
+            })
+            console.log(response);
+            console.log(userExists);
+            if(!response.data.true){
+            setUserExists(response.data);
+            setTimeout(() => {
+                setUserExists(null);
+                window.location.replace('/')
+              }, 3000);
+            }
+            else{
+                setStep({value: step.value+1}); 
+            }
+    
+            
+        }
+        catch(err){
+            console.log(err);
+        }
+      }
 
   const handleSubmit = async()=>{
     setSubmitDisabled(true);
@@ -81,10 +109,16 @@ function Login() {
                
                 
                 <div className="pt-4"> 
-                    <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels" onClick={handleNext}>
+                    <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels" onClick={checkUser}>
                         Next
                     </button>
                 </div>
+
+                {userExists && (
+                    <div className="text-red-700 bg-transparent font-medium p-2 mt-4 rounded text-center">
+                    <p>User does not exists. Redirecting to signup page.</p>
+                  </div>
+                )}
                 {/* {login.value === 'phone' ?(
                 <div className="pt-4"> 
                     <button className="w-full h-12 rounded text-secondary text-panels font-semibold bg-transparent border-2 border-panels"
