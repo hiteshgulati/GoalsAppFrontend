@@ -1,8 +1,8 @@
 {
   "name": "goal",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": true,
-  "proxy": "http://54.160.182.187:8000/",
+  "proxy": "https://amb-api-dev.embetter.in/",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
     "@testing-library/jest-dom": "^5.17.0",

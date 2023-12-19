@@ -1,23 +1,32 @@
 import React from 'react'
 import { FaEyeSlash } from "react-icons/fa";
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {Link} from "react-router-dom"
 import axios, {AxiosError} from 'axios';
 import PhoneInput, { CountryData } from 'react-phone-input-2'
+import logo from '../Logo.svg'
+import { AuthContext } from '../../Context/Auth';
+
+
 
 function Login() {
     
     const [mobile_number, setMobileNumber] = useState("");
     const [isd_code, setIsd_code] = useState("");
     const [password, setPassword] = useState("");
-    const [isSubmitDisabled, setSubmitDisabled] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
+    // const [isSubmitDisabled, setSubmitDisabled] = useState(false);
+    // const [errorMessage, setErrorMessage] = useState('');
     const [userExists, setUserExists] = useState(null);
 
     const [step, setStep] = 
     useState<{value: number}>({
         value: 0
   });
+
+
+  const context = useContext(AuthContext);
+    console.log(context?.currentUser);
+//   const currentUser:any = context
 
     // console.log({mobile_number, isd_code, password});
 
@@ -48,23 +57,30 @@ function Login() {
       }
 
   const handleSubmit = async()=>{
-    setSubmitDisabled(true);
-    setTimeout(() => {
-        setSubmitDisabled(false);
-      }, 30000);
-    setTimeout(() => {
-        setErrorMessage('');
-      }, 30000);
-    try{
-        const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/mobile-password?isd_code=${isd_code}&phone=${mobile_number}&password=${password}`
-           );
-        console.log(response);
-    }catch(err){
-        const axiosError = err as AxiosError<any>;
-        if(axiosError.response) console.log(axiosError.response.data.detail);
+    // setSubmitDisabled(true);
+    // setTimeout(() => {
+    //     setSubmitDisabled(false);
+    //   }, 30000);
+    // setTimeout(() => {
+    //     setErrorMessage('');
+    //   }, 30000);
+    // try{
+    //     const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/mobile-password?isd_code=${isd_code}&phone=${mobile_number}&password=${password}`
+    //        );
+    //     console.log(response);
+    // }catch(err){
+    //     const axiosError = err as AxiosError<any>;
+    //     if(axiosError.response) console.log(axiosError.response.data.detail);
 
+    //     console.log(err);
+    //     setErrorMessage(axiosError.response?.data.detail || 'Login failed. Please try again.');
+    // }
+    try{
+        await context?.login(isd_code, mobile_number, password)
+        console.log(context?.currentUser?.token);
+    }
+    catch(err){
         console.log(err);
-        setErrorMessage(axiosError.response?.data.detail || 'Login failed. Please try again.');
     }
 }
 
@@ -80,7 +96,9 @@ function Login() {
     <>
     <div className="p-4 bg-base-color w-screen h-screen">
         
-        <div className="sm:text-5xl sm:ml-28 sm:mt-8 text-xxl font-bold text-panels">Logo</div>
+        <div className="sm:ml-28 sm:mt-8 mt-2">
+            <img src={logo} alt="" width="60" height="60"/>
+        </div>
         {/* <div className="sm:w-96 sm:absolute lg:left-1/4 sm:top-1/4 sm:translate-x-1/2 sm:tarnslate-y-1/2"> */}
         <div className="flex flex-col md:justify-center md:items-center">
             <div className="md:w-96 md:mt-10">
@@ -152,7 +170,7 @@ function Login() {
                 <div className="pt-4"> 
                     <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels disabled:opacity-25"
                     onClick={handleSubmit}
-                    disabled={isSubmitDisabled}
+                    disabled={context?.isSubmitDisabled}
                     >
                         Submit
                     </button>
@@ -164,9 +182,9 @@ function Login() {
                     </button>
                 </div>
 
-                {errorMessage && (
+                {context?.errorMessage && (
                     <div className="text-red-700 bg-transparent font-medium p-2 mt-4 rounded text-center">
-                    {errorMessage}
+                    {context.errorMessage}
                   </div>
                 )}
                 

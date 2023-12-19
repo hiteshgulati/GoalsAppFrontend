@@ -5,6 +5,7 @@ import 'react-phone-input-2/lib/style.css'
 import axios, {AxiosError} from 'axios';
 import getVersion from "../Version"
 import mailgo from "mailgo";
+import logo from './Logo.svg'
 
 
 
@@ -48,6 +49,11 @@ function Register() {
     auth.phone = mobile_number;
     auth.isd_code = isd_code
 
+    const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const handleNext = () =>{
     setStep({value: step.value+1});
@@ -58,7 +64,7 @@ function Register() {
 
   const checkUser = async()=>{
     try{
-        const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
+        const response = await axios.post(`https://amb-api-dev.embetter.in/users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
             isd_code,
             mobile_number
         })
@@ -141,7 +147,10 @@ function Register() {
         <>
         <div className="p-4 bg-base-color w-screen h-screen">
         
-        <div className="sm:text-5xl sm:ml-28 sm:mt-8 text-xxl font-bold text-panels">Logo</div>
+        {/* <div className="sm:text-5xl sm:ml-28 sm:mt-8 text-xxl font-bold text-panels">Logo</div> */}
+        <div className="sm:ml-28 sm:mt-8 mt-2">
+            <img src={logo} alt="" width="60" height="60"/>
+        </div>
         {/* <div className="sm:w-96 sm:absolute lg:left-1/4 sm:top-1/4 sm:translate-x-1/2 sm:tarnslate-y-1/2"> */}
         <div className="flex flex-col md:justify-center md:items-center">
         <div className="md:w-96 md:mt-10">
@@ -209,7 +218,9 @@ function Register() {
         <>
         <div className="p-4 bg-base-color w-screen h-screen">
         
-        <div className="sm:text-5xl sm:ml-28 sm:mt-8 text-xxl font-bold text-panels">Logo</div>
+        <div className="sm:ml-28 sm:mt-8 mt-2">
+            <img src={logo} alt="" width="60" height="60"/>
+        </div>
         {/* <div className="sm:w-96 sm:absolute lg:left-1/4 sm:top-1/4 sm:translate-x-1/2 sm:tarnslate-y-1/2"> */}
         <div className="flex flex-col md:justify-center md:items-center">
         <div className="md:w-96 md:mt-10">
@@ -291,7 +302,9 @@ function Register() {
         <>
         <div className="p-4 bg-base-color w-screen h-screen">
         
-        <div className="sm:text-5xl sm:ml-28 sm:mt-8 text-xxl font-bold text-panels">Logo</div>
+        <div className="sm:ml-28 sm:mt-8 mt-2">
+            <img src={logo} alt="" width="60" height="60"/>
+        </div>
         {/* <div className="sm:w-96 sm:absolute lg:left-1/4 sm:top-1/4 sm:translate-x-1/2 sm:tarnslate-y-1/2"> */}
         <div className="flex flex-col md:justify-center md:items-center">
         <div className="md:w-96 md:mt-10">
@@ -309,9 +322,13 @@ function Register() {
                 setAuth({...auth, pan:e.target?.value})
             }}/>
         </div>
+        <div className="flex items-center mt-4">
+            <input  type="checkbox" value="" checked={isChecked} onChange={handleCheckboxChange} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+            <label  className="ms-2 text-sm font-medium">I understand the <Link to="terms-and-condition" className="underline">Terms and Conditions.</Link></label>
+        </div>
         
         <div className="pt-4"> 
-            <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels disabled:opacity-25" disabled={isSubmitDisabled} onClick={handleSubmit}>
+            <button className="w-full h-12 rounded text-secondary text-white font-semibold bg-panels disabled:opacity-25" disabled={!isChecked} onClick={handleSubmit}>
                 Sign Up
             </button>
         </div>
