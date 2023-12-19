@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {MdOutlineKeyboardArrowLeft} from 'react-icons/md'
 import {PiPencilSimpleLight} from 'react-icons/pi'
 import {BsCurrencyRupee, BsPersonFillAdd, BsLinkedin} from 'react-icons/bs'
@@ -8,10 +8,50 @@ import {RiWhatsappFill} from 'react-icons/ri'
 import {FaTelegramPlane, FaInstagram} from 'react-icons/fa'
 import Navbar from '../Navbar/Navbar'
 import {Link} from 'react-router-dom'
-
+import { AuthContext } from '../../Context/Auth'
+import axios from 'axios'
 
 
 function Profile1() {
+    const [user, setUser] = useState<any>(null)
+
+    const context = useContext(AuthContext);
+    // console.log(context);
+
+    useEffect(()=>{
+        const fetchData = async()=>{
+            try{
+                const response = await axios.get("http://54.160.182.187:8000/users/me",{
+                    headers:{
+                        'Authorization':`Bearer ${context?.currentUser?.token}`,
+                        'Content-Type':'application/json'
+                    }
+                })
+                setUser(response.data)
+                console.log(user);
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+        fetchData();
+    },[])
+
+    // const fetchData = async()=>{
+    //     try{
+    //         const response = await axios.get("http://54.160.182.187:8000/users/me",{
+    //             headers:{
+    //                 'Authorization':`Bearer ${context?.currentUser?.token}`,
+    //                 'Content-Type':'application.json'
+    //             }
+    //         })
+    //         setUser(response.data)
+    //     }
+    //     catch(err){
+    //         console.log(err);
+    //     }
+    // }
+
   return (
     <>
     <div className="h-screen w-screen bg-base-color relative">
@@ -36,8 +76,8 @@ function Profile1() {
             </div>
             <div className="basis-3/4 p-1 flex flex-row justify-between">
                 <div>
-                    <p className="text-lg font-semibold">Jane Doe</p>
-                    <p className="text-sm">9310223096</p>
+                    <p className="text-lg font-semibold">{user?.name}</p>
+                    <p className="text-sm">{user?.phone}</p>
                 </div>
                 <Link to="edit">
                 <PiPencilSimpleLight />
@@ -48,16 +88,16 @@ function Profile1() {
         <div className="flex flex-row pt-1 pr-3">
             <div className="basis-1/4"></div>
             <div className="basis-3/4">
-                <p className="text-xl sm:text-2xl font-bold pb-2">Goals</p>
+                <p className="text-xl sm:text-2xl font-bold pb-2">No goals configured</p>
             <div className="w-full rounded h-5 dark:bg-gray-300">
-                <div className="bg-panels h-5 rounded" style={{width:"45%"}}></div>
+                <div className="bg-panels h-5 rounded" style={{width:"0%"}}></div>
                 <div className="flex flex-row justify-between">
                     <p className="flex flex-row text-secondary font-semibold">
                         <span className="text-panels flex flex-row">
-                            <BsCurrencyRupee className='pt-1' size={20}/> 4.53L/
+                            <BsCurrencyRupee className='pt-1' size={20}/> 0/
                             </span>
-                        <BsCurrencyRupee className='pt-1' size={20}/>19.69L</p>     
-                    <p className="text-panels font-semibold">73%</p>
+                        <BsCurrencyRupee className='pt-1' size={20}/>0</p>     
+                    <p className="text-panels font-semibold">0%</p>
                 </div>
             </div>
             </div>
@@ -65,27 +105,27 @@ function Profile1() {
         <div className="flex flex-row pt-9 pr-3">
             <div className="basis-1/4"></div>
             <div className="basis-3/4">
-                <p className="text-xl md:text-2xl font-bold pb-2">Assets</p>
+                <p className="text-xl md:text-2xl font-bold pb-2">No funds linked</p>
             <div className="w-full rounded h-8 dark:bg-gray-300">
-                <div className="bg-panels h-8 rounded" style={{width:"45%"}}></div>
+                <div className="bg-panels h-8 rounded" style={{width:"0%"}}></div>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt-1">
                     <p className="flex flex-row font-semibold">
-                        Allocated (89%)
+                        Allocated (0%)
                     </p>   
-                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 4.53L</p>
+                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 0</p>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt">
                     <p className="flex flex-row font-semibold">
-                        Free Use (11%)
+                        Free Use 0%)
                     </p>   
-                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 55.3K</p>
+                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 0</p>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt">
                     <p className="flex flex-row font-semibold">
-                        Total (100%)
+                        Total (0%)
                     </p>   
-                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 5.09L</p>
+                    <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 0</p>
                 </div>
             </div>
         </div>

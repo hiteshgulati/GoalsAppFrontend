@@ -15,6 +15,7 @@ import Allocation from './Components/allocations/Allocation';
 import GoalHome from './Components/allocations/GoalHome';
 import AssetsInfo from './Components/allocations/AssetsInfo';
 import Goals from './Components/goals/Goals'
+import TermsAndCondition from './Components/TermsAndCondition/TermsAndCondition';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
     <Route path="/goalHome" element = {<GoalHome />} />
     <Route path="/assetInfo" element = {<AssetsInfo />} />
     <Route path="/goal" element={<Goals />} />
+    <Route path="/terms-and-condition" element={<TermsAndCondition />} />
     </Routes>
     </>
   );
