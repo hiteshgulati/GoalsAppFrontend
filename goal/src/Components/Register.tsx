@@ -6,6 +6,7 @@ import axios, {AxiosError} from 'axios';
 import getVersion from "../Version"
 import mailgo from "mailgo";
 import logo from './Logo.svg'
+import { axiosInstance } from '../config';
 
 
 
@@ -64,7 +65,7 @@ function Register() {
 
   const checkUser = async()=>{
     try{
-        const response = await axios.post(`https://amb-api-dev.embetter.in/users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
+        const response = await axiosInstance.post(`users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
             isd_code,
             mobile_number
         })
@@ -98,7 +99,7 @@ function Register() {
       }, 30000);
     // e.preventDefault();
     try{
-        const response = await axios.post(`https://amb-api-dev.embetter.in/users/register/mobile-otp?isd_code=${isd_code}&mobile_number=${mobile_number}`,{
+        const response = await axiosInstance.post(`users/register/mobile-otp?isd_code=${isd_code}&mobile_number=${mobile_number}`,{
             isd_code,
             mobile_number
         })
@@ -324,7 +325,7 @@ function Register() {
         </div>
         <div className="flex items-center mt-4">
             <input  type="checkbox" value="" checked={isChecked} onChange={handleCheckboxChange} className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label  className="ms-2 text-sm font-medium">I understand the <Link to="terms-and-condition" className="underline">Terms and Conditions.</Link></label>
+            <label  className="ms-2 text-sm font-medium">I understand the <Link to="terms-and-condition" target="_blank" className="underline">Terms and Conditions.</Link></label>
         </div>
         
         <div className="pt-4"> 

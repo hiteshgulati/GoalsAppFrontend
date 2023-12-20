@@ -1,5 +1,6 @@
 import axios, {AxiosError} from "axios";
 import { createContext, useEffect, useState, ReactNode } from "react";
+import { axiosInstance } from "../config";
 
 interface User {
   exp: string;
@@ -11,6 +12,7 @@ interface AuthContextProps {
   login: (isdCode: string, mobileNumber: string, password:string) => void;
   isSubmitDisabled: boolean;
   errorMessage: string;
+  logout: () => void;
 }
 
 interface AuthContextProviderProps {
@@ -38,10 +40,11 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         setErrorMessage('');
       }, 30000);
     try{
-        const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/mobile-password?isd_code=${isdCode}&phone=${mobileNumber}&password=${password}`
+        const response = await axiosInstance.post(`users/auth/login/mobile-password?isd_code=${isdCode}&phone=${mobileNumber}&password=${password}`
            );
            setCurrentUser(response.data)
         console.log(response);
+        response.data && window.location.replace('/profile')
     }catch(err){
         const axiosError = err as AxiosError<any>;
         if(axiosError.response) console.log(axiosError.response.data.detail);
@@ -51,12 +54,18 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     }
   };
 
+  const logout = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("user");
+    window.location.replace("/login");
+  };
+
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser,isSubmitDisabled,errorMessage ,login }}>
+    <AuthContext.Provider value={{ currentUser,isSubmitDisabled,errorMessage ,login, logout }}>
       {children}
     </AuthContext.Provider>
   );
