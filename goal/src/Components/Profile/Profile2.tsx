@@ -111,12 +111,7 @@ function Profile2() {
         fetchData();
     }, [context?.currentUser])
 
-    // update.name = user?.name;
-    // update.gender = user?.gender;
-    // update.pan = user?.pan;
-    // update.aadhaar = user?.aadhaar;
-    
-    // console.log(update);
+   
 
     const updateData = async()=>{
         try{
@@ -157,7 +152,7 @@ function Profile2() {
             <div className="md:w-600 mt-6">
             <div className="flex justify-center items-center mt-3">
                 <div className="h-24 w-24 relative">
-                {imageType && imageUrl ?(
+                {imageType && imageUrl ? (
                 <img className="rounded-full h-24 w-24 md:h-20 md:w-20" src={`data:${imageType};base64,${imageUrl}`} alt="" />):
                 <img className="rounded-full h-24 w-24 md:h-20 md:w-20" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />  
             }
