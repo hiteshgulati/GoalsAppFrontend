@@ -1,6 +1,6 @@
 {
   "name": "goal",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "proxy": "https://amb-api-dev.embetter.in/",
   "dependencies": {
