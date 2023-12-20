@@ -6,6 +6,7 @@ import axios, {AxiosError} from 'axios';
 import PhoneInput, { CountryData } from 'react-phone-input-2'
 import logo from '../Logo.svg'
 import { AuthContext } from '../../Context/Auth';
+import { axiosInstance } from '../../config';
 
 
 
@@ -28,11 +29,11 @@ function Login() {
     console.log(context?.currentUser);
 //   const currentUser:any = context
 
-    // console.log({mobile_number, isd_code, password});
+    console.log({mobile_number, isd_code, password});
 
     const checkUser = async()=>{
         try{
-            const response = await axios.post(`http://54.160.182.187:8000/users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
+            const response = await axiosInstance.post(`users/auth/login/check-user?isd_code=${isd_code}&phone=${mobile_number}`,{
                 isd_code,
                 mobile_number
             })
@@ -77,7 +78,7 @@ function Login() {
     // }
     try{
         await context?.login(isd_code, mobile_number, password)
-        console.log(context?.currentUser?.token);
+        // console.log(context?.currentUser?.token);
     }
     catch(err){
         console.log(err);

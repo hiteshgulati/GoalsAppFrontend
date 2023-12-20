@@ -10,6 +10,7 @@ import Navbar from '../Navbar/Navbar'
 import {Link} from 'react-router-dom'
 import { AuthContext } from '../../Context/Auth'
 import axios from 'axios'
+import { axiosInstance } from '../../config'
 
 
 function Profile1() {
@@ -21,7 +22,7 @@ function Profile1() {
     useEffect(()=>{
         const fetchData = async()=>{
             try{
-                const response = await axios.get("http://54.160.182.187:8000/users/me",{
+                const response = await axiosInstance.get("users/me",{
                     headers:{
                         'Authorization':`Bearer ${context?.currentUser?.token}`,
                         'Content-Type':'application/json'
@@ -37,20 +38,14 @@ function Profile1() {
         fetchData();
     },[])
 
-    // const fetchData = async()=>{
-    //     try{
-    //         const response = await axios.get("http://54.160.182.187:8000/users/me",{
-    //             headers:{
-    //                 'Authorization':`Bearer ${context?.currentUser?.token}`,
-    //                 'Content-Type':'application.json'
-    //             }
-    //         })
-    //         setUser(response.data)
-    //     }
-    //     catch(err){
-    //         console.log(err);
-    //     }
-    // }
+    const userLogout = async()=>{
+        try{
+            await context?.logout();
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
   return (
     <>
@@ -88,8 +83,9 @@ function Profile1() {
         <div className="flex flex-row pt-1 pr-3">
             <div className="basis-1/4"></div>
             <div className="basis-3/4">
-                <p className="text-xl sm:text-2xl font-bold pb-2">No goals configured</p>
-            <div className="w-full rounded h-5 dark:bg-gray-300">
+                <p className="text-xl sm:text-2xl font-bold pb-1">Goals</p>
+                <p className="text-lg sm:text-xl font-semibold pb-2">No goals configured</p>
+            {/* <div className="w-full rounded h-5 dark:bg-gray-300">
                 <div className="bg-panels h-5 rounded" style={{width:"0%"}}></div>
                 <div className="flex flex-row justify-between">
                     <p className="flex flex-row text-secondary font-semibold">
@@ -99,14 +95,15 @@ function Profile1() {
                         <BsCurrencyRupee className='pt-1' size={20}/>0</p>     
                     <p className="text-panels font-semibold">0%</p>
                 </div>
-            </div>
+            </div> */}
             </div>
         </div>
         <div className="flex flex-row pt-9 pr-3">
             <div className="basis-1/4"></div>
             <div className="basis-3/4">
-                <p className="text-xl md:text-2xl font-bold pb-2">No funds linked</p>
-            <div className="w-full rounded h-8 dark:bg-gray-300">
+                <p className="text-xl md:text-2xl font-bold pb-1">Funds</p>
+                <p className="text-lg md:text-xl font-semibold pb-1">No funds linked</p>
+                {/* <div className="w-full rounded h-8 dark:bg-gray-300">
                 <div className="bg-panels h-8 rounded" style={{width:"0%"}}></div>
                 </div>
                 <div className="flex flex-row justify-between text-sm pt-1">
@@ -126,13 +123,13 @@ function Profile1() {
                         Total (0%)
                     </p>   
                     <p className="text-panels font-semibold flex flex-row"> <BsCurrencyRupee className='pt-1' size={20}/> 0</p>
-                </div>
+                </div> */}
             </div>
         </div>
         <div className="flex flex-row pt-20">
             <div className="basis-1/4 pt-1 pl-10 text-panels"><TbLogout size={24}/></div>
             <div className="basis-3/4">
-                <p className="text-secondary font-semibold">Logout</p>
+                <p className="text-secondary font-semibold" onClick={userLogout}>Logout</p>
             </div>
         </div>
         <div className="flex flex-row pt-4">
