@@ -10,11 +10,14 @@ import Navbar from '../Navbar/Navbar'
 import {Link} from 'react-router-dom'
 import { AuthContext } from '../../Context/Auth'
 import axios from 'axios'
+import user from '../../Assests/user.png'
 import { axiosInstance } from '../../config'
 
 
 function Profile1() {
     const [user, setUser] = useState<any>(null)
+    const [imageUrl, setImageUrl] = useState<string>('');  
+    const [imageType, setImageType] = useState<string>(''); 
 
     const context = useContext(AuthContext);
     // console.log(context);
@@ -35,7 +38,26 @@ function Profile1() {
                 console.log(err);
             }
         }
+
+        const getImage = async()=>{
+            try{
+                const response = await axiosInstance.get("users/me/pic",{
+                    headers:{
+                        'Authorization':`Bearer ${context?.currentUser?.token}`,
+                        'Content-Type' : 'application/json'
+                    }
+                })
+                console.log(response.data);
+                setImageUrl(response.data.data);
+                setImageType(response.data.media_type);
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+
         fetchData();
+        getImage();
     },[])
 
     const userLogout = async()=>{
@@ -67,7 +89,11 @@ function Profile1() {
     <div className="p-4 md:w-800 md:mt-10">
         <div className="flex flex-row">
             <div className="basis-1/4 p-1">
-                <img className="rounded-full h-14 w-14 md:h-20 md:w-20" src="https://cdn.pixabay.com/photo/2017/06/18/18/26/holi-2416686_640.jpg" alt="" />
+                {imageType && imageUrl ?(
+                <img className="rounded-full h-14 w-14 md:h-20 md:w-20" src={`data:${imageType};base64,${imageUrl}`} alt="" />):
+                <img className="rounded-full h-14 w-14 md:h-20 md:w-20" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
+                
+            }
             </div>
             <div className="basis-3/4 p-1 flex flex-row justify-between">
                 <div>
