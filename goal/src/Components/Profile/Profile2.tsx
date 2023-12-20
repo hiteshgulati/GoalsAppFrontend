@@ -8,6 +8,7 @@ import axios from 'axios';
 import {Link} from "react-router-dom"
 import { AuthContext } from '../../Context/Auth';
 import { axiosInstance } from '../../config';
+import user from '../../Assests/user.png'
 
 
 function Profile2() {
@@ -79,9 +80,10 @@ function Profile2() {
             handleUpload();
           }
           getImage();
-      },[selectedFile])
+      })
       console.log(imageUrl);
       console.log(imageType);
+      
       
 
     useEffect(()=>{
@@ -155,7 +157,10 @@ function Profile2() {
             <div className="md:w-600 mt-6">
             <div className="flex justify-center items-center mt-3">
                 <div className="h-24 w-24 relative">
-                <img className="h-24 w-24 rounded-lg" src={`data:image/jpeg;base64,${imageUrl}`} alt="" />
+                {imageType && imageUrl ?(
+                <img className="rounded-full h-24 w-24 md:h-20 md:w-20" src={`data:${imageType};base64,${imageUrl}`} alt="" />):
+                <img className="rounded-full h-24 w-24 md:h-20 md:w-20" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />  
+            }
                 <div className="absolute bottom-0 right-0 bg-white rounded-full p-1 cursor-pointer">
                     <label htmlFor="myfile" className=''>
                     <input type="file" id="myfile" name="myfile" className="hidden" onChange={handleFileChange}/>

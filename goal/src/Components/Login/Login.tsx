@@ -15,6 +15,7 @@ function Login() {
     const [mobile_number, setMobileNumber] = useState("");
     const [isd_code, setIsd_code] = useState("");
     const [password, setPassword] = useState("");
+    const [take, setTake] = useState("");
     // const [isSubmitDisabled, setSubmitDisabled] = useState(false);
     // const [errorMessage, setErrorMessage] = useState('');
     const [userExists, setUserExists] = useState(null);
@@ -78,6 +79,7 @@ function Login() {
     // }
     try{
         await context?.login(isd_code, mobile_number, password)
+        setTake("Redirecting to profile Page");
         // console.log(context?.currentUser?.token);
     }
     catch(err){
@@ -182,7 +184,11 @@ function Login() {
                         Back
                     </button>
                 </div>
-
+                {take && (
+                    <div className="text-panels bg-transparent font-medium p-2 mt-4 rounded text-center">
+                    {take}
+                  </div>
+                )}
                 {context?.errorMessage && (
                     <div className="text-red-700 bg-transparent font-medium p-2 mt-4 rounded text-center">
                     {context.errorMessage}
